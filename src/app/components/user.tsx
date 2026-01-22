@@ -14,7 +14,7 @@ function fetcher(url: string) {
 export default function User() {
     const user = useQuery({
         queryKey: ["user"],
-        queryFn: () => fetcher("https://api.github.com/users/Tassio2002")
+        queryFn: () => fetcher("/api/user"),
     });
 
     if (user.isPending) return <div>Loading...</div>;
