@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import CoreProvider from "./_components/providers";
+import CoreProvider from "./providers";
 
 const roboto = Roboto({
   variable: "--font-roboto-sans",
