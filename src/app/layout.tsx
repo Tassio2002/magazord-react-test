@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import CoreProvider from "./providers";
+import Header from "./components/Header";
 
 const roboto = Roboto({
   variable: "--font-roboto-sans",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} antialiased`}
       >
+        <Header />
         <CoreProvider>{children}</CoreProvider>
       </body>
     </html>
