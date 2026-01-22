@@ -17,7 +17,7 @@ export default function User() {
     if (user?.data?.error) return <div>Error loading repository list.</div>
 
     if (user?.data?.lenght === 0 ) return <div>No repository was found.</div>
-
+    
     return (
         <div>
             {user.data?.name}
