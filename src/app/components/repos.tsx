@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Tabs from "./Tabs";
+import FilterSection from "./FilterSection";
 
 function fetcher(url: string) {
     return fetch(url).then((res) => res.json());
@@ -22,6 +23,7 @@ export default function Repos() {
     return (
         <div>
             <Tabs />
+            <FilterSection />
             <ul>
                 {repos.data?.map((repo: any) => ( // tipar corretamente
                     <li key={repo.id}>
