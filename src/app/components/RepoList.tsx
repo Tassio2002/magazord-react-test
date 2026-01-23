@@ -61,6 +61,7 @@ export default function RepoList() {
             {filteredRepos.map((repo: any) => ( // tipar corretamente
                 <li key={repo.id}>
                     <RepoItem
+                        repo={repo}
                         ownerLogin={repo.owner.login}
                         name={repo.name}
                         description={repo.description}
