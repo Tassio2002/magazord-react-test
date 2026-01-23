@@ -1,5 +1,5 @@
-import Repos from "./components/repos";
-import User from "./components/user";
+import Repos from "./components/Repos";
+import User from "./components/User";
 
 export default async function Home() {
   return (
