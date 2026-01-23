@@ -43,7 +43,7 @@ export default function MultiSelectDropdown({
       const newSelected = selectedValues.includes(optionId)
         ? selectedValues.filter(id => id !== optionId)
         : [...selectedValues.filter(id => id !== 'all'), optionId];
-      
+
       onSelectionChange(newSelected.length === 0 ? ['all'] : newSelected);
     }
   };

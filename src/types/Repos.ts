@@ -1,5 +1,6 @@
 export type Repos = {
-    fullName: string
+    ownerLogin: string
+    name: string
     description: string
     starsQuantity: number
     forksQuantity: number
