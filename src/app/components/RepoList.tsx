@@ -34,7 +34,7 @@ export default function RepoList() {
 
     if (repos?.data?.length === 0) return <div>No repository was found.</div>
     return (
-        <ul className="flex flex-col gap-12">
+        <ul className="flex flex-col gap-12 pt-10">
             {filteredRepos.map((repo: any) => ( // tipar corretamente
                 <li key={repo.id}>
                     <RepoItem
