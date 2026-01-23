@@ -1,13 +1,18 @@
+import { useTabStore } from "../store/tabStore";
 import RepoItem from "./RepoItem";
 import { useQuery } from "@tanstack/react-query";
 
 function fetcher(url: string) {
     return fetch(url).then((res) => res.json());
 }
+
 export default function RepoList() {
+    const tabStore = useTabStore();
+    const activeTab = tabStore.activeTab
+    const reposUrl = activeTab === "repositories" ? "/api/repos" : "/api/starredRepos"
     const repos = useQuery({
-        queryKey: ["repos"],
-        queryFn: () => fetcher("/api/repos")
+        queryKey: ["repos", activeTab],
+        queryFn: () => fetcher(reposUrl)
     });
 
     if (repos.isPending) return <div>Loading...</div>;
