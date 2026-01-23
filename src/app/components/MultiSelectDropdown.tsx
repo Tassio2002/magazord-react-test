@@ -23,7 +23,7 @@ export default function MultiSelectDropdown({
 }: MultiSelectDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
+  
   // Fecha ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

@@ -3,6 +3,7 @@ import { useTabStore } from "../store/tabStore";
 import { useSearchStore } from "../store/searchStore";
 import RepoItem from "./RepoItem";
 import { useQuery } from "@tanstack/react-query";
+import { useFilterStore } from "../store/FilterStore";
 
 function fetcher(url: string) {
     return fetch(url).then((res) => res.json());
@@ -11,6 +12,7 @@ function fetcher(url: string) {
 export default function RepoList() {
     const tabStore = useTabStore();
     const { searchQuery } = useSearchStore();
+    const { selectedLanguages, selectedTypes } = useFilterStore();
     const activeTab = tabStore.activeTab
     const reposUrl = activeTab === "repositories" ? "/api/repos" : "/api/starredRepos"
 
@@ -21,12 +23,33 @@ export default function RepoList() {
 
     const filteredRepos = useMemo(() => {
         if (!repos.data) return [];
-        if (!searchQuery) return repos.data;
 
-        return repos.data.filter((repo: any) =>
-            repo.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-    }, [repos.data, searchQuery]);
+        let filteredData = repos.data;
+
+        if (searchQuery) {
+            filteredData = filteredData.filter((repo: any) =>
+                repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
+
+        if (!selectedLanguages.includes('all')) {
+            filteredData = filteredData.filter((repo: any) =>
+                repo.language && selectedLanguages.includes(repo.language.toLowerCase())
+            );
+        }
+
+        if (!selectedTypes.includes('all')) {
+            filteredData = filteredData.filter((repo: any) => {
+                if (selectedTypes.includes('sources') && !repo.fork && !repo.mirror_url) return true;
+                if (selectedTypes.includes('forks') && repo.fork) return true;
+                if (selectedTypes.includes('archived') && repo.archived) return true;
+                if (selectedTypes.includes('mirrors') && repo.mirror_url) return true;
+                return false;
+            });
+        }
+
+        return filteredData;
+    }, [repos.data, searchQuery, selectedLanguages, selectedTypes]);
 
     if (repos.isPending) return <div>Loading...</div>;
 

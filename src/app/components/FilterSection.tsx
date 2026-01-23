@@ -1,11 +1,9 @@
 import MultiSelectDropdown from "./MultiSelectDropdown";
-import { useState } from "react";
 import SearchBar from "./SearchBar";
+import { useFilterStore } from "../store/FilterStore";
 
 export default function FilterSection() {
-    const [selectedTypes, setSelectedTypes] = useState<string[]>(['all']);
-    const [selectedLanguages, setSelectedLanguages] = useState<string[]>(['all']);
-
+    const { selectedTypes, selectedLanguages, setSelectedTypes, setSelectedLanguages } = useFilterStore();
     const typeOptions = [
         { id: 'all', label: 'All' },
         { id: 'sources', label: 'Sources' },
