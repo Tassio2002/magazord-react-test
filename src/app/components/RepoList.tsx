@@ -7,7 +7,7 @@ function fetcher(url: string) {
 export default function RepoList() {
     const repos = useQuery({
         queryKey: ["repos"],
-        queryFn: () => fetcher("https://api.github.com/users/Tassio2002/repos")
+        queryFn: () => fetcher("/api/repos")
     });
 
     if (repos.isPending) return <div>Loading...</div>;
